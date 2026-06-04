@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   FileText,
   MessageSquare,
@@ -13,7 +14,6 @@ import {
   Shield,
   ChevronRight,
   CheckCircle,
-  AlertTriangle,
   Building2,
   Phone,
   Sparkles,
@@ -90,6 +90,7 @@ export function EventLandingPage({
   isLoggedIn: initialLoggedIn = false,
   onLogin,
 }: EventLandingPageProps) {
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(initialLoggedIn);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [downloadedMaterials, setDownloadedMaterials] = useState<number[]>([4]);
@@ -260,7 +261,10 @@ export function EventLandingPage({
         </h2>
         <div className="grid grid-cols-1 gap-3">
           {/* AI 税务助手 */}
-          <Card className="cursor-pointer border-0 shadow-sm transition-all hover:shadow-md">
+          <Card
+            className="cursor-pointer border-0 shadow-sm transition-all hover:shadow-md"
+            onClick={() => router.push("/tax-ai")}
+          >
             <CardContent className="flex items-center gap-4 p-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80">
                 <Sparkles className="h-6 w-6 text-primary-foreground" />
@@ -276,7 +280,10 @@ export function EventLandingPage({
           </Card>
 
           {/* 财税风险测评 */}
-          <Card className="cursor-pointer border-0 shadow-sm transition-all hover:shadow-md">
+          <Card
+            className="cursor-pointer border-0 shadow-sm transition-all hover:shadow-md"
+            onClick={() => router.push("/risk-assessment")}
+          >
             <CardContent className="flex items-center gap-4 p-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-warning to-warning/80">
                 <ClipboardCheck className="h-6 w-6 text-white" />
@@ -292,19 +299,21 @@ export function EventLandingPage({
           </Card>
 
           {/* 预约顾问 */}
-          <Card className="cursor-pointer border-2 border-destructive/20 bg-destructive/5 shadow-sm transition-all hover:shadow-md">
+          <Card
+            className="cursor-pointer border-0 shadow-sm transition-all hover:shadow-md"
+            onClick={() => router.push("/appointment")}
+          >
             <CardContent className="flex items-center gap-4 p-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-destructive to-destructive/80">
-                <Phone className="h-6 w-6 text-white" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                <Phone className="h-6 w-6 text-primary" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h3 className="font-semibold text-foreground">预约顾问</h3>
                   <Badge
-                    variant="destructive"
-                    className="bg-destructive/10 text-destructive"
+                    variant="secondary"
+                    className="bg-secondary text-secondary-foreground hover:bg-secondary"
                   >
-                    <AlertTriangle className="mr-1 h-3 w-3" />
                     推荐
                   </Badge>
                 </div>
@@ -349,14 +358,14 @@ export function EventLandingPage({
           <Button
             variant="outline"
             className="flex-1"
-            onClick={() => setShowLoginModal(true)}
+            onClick={() => router.push("/support")}
           >
             <MessageSquare className="mr-2 h-4 w-4" />
             咨询客服
           </Button>
           <Button
             className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90"
-            onClick={() => setShowLoginModal(true)}
+            onClick={() => router.push("/appointment")}
           >
             <Calendar className="mr-2 h-4 w-4" />
             立即预约
