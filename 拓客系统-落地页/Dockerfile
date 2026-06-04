@@ -2,22 +2,22 @@ FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-RUN corepack enable
+RUN corepack enable && corepack prepare pnpm@11.5.0 --activate
 
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml ./
 
+RUN pnpm -v
 RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN node -v
 RUN pnpm build
 
 FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-RUN corepack enable
+RUN corepack enable && corepack prepare pnpm@11.5.0 --activate
 
 ENV NODE_ENV=production
 ENV PORT=3000
