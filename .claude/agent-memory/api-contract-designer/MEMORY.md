@@ -1,0 +1,2 @@
+- [二维码/邀请码模块契约已完成](project_qr_contract_done.md) — 三文件已存在完整，21 个 DTO，2026-06-10 完成
+- [已完成契约模块清单](project_contracts_completed.md) — 用户管理和二维码管理均已完成，含所有文件路径
